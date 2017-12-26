@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * This file is part of Mindy Framework.
- * (c) 2017 Maxim Falaleev
+ * Studio 107 (c) 2017 Maxim Falaleev
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -49,7 +50,7 @@ final class App
      * @param string $environment
      * @param bool   $debug
      */
-    final private function __construct($className, $environment, $debug = false)
+    private function __construct($className, $environment, $debug = false)
     {
         $this->debug = $debug;
         $this->kernel = new $className($environment, $debug);
@@ -64,7 +65,7 @@ final class App
      */
     public static function createInstance($className, $environment, $debug)
     {
-        if (self::$instance === null) {
+        if (null === self::$instance) {
             self::$instance = new self($className, $environment, $debug);
         }
 
@@ -78,7 +79,7 @@ final class App
      */
     public static function getInstance($throw = true)
     {
-        if (self::$instance === null && $throw) {
+        if (null === self::$instance && $throw) {
             throw new \LogicException(
                 'Please run createInstance and create application before get application instance'
             );
@@ -135,12 +136,12 @@ final class App
      */
     public function run()
     {
-        if (php_sapi_name() === 'cli') {
+        if ('cli' === php_sapi_name()) {
             // do run console application
 
             $input = new ArgvInput();
             $env = $input->getParameterOption(['--env', '-e'], getenv('SYMFONY_ENV') ?: 'dev');
-            $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
+            $debug = '0' !== getenv('SYMFONY_DEBUG') && !$input->hasParameterOption(['--no-debug', '']) && 'prod' !== $env;
 
             if ($debug || $this->debug) {
                 Debug::enable();

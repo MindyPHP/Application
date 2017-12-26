@@ -1,6 +1,7 @@
 .idea
 /Tests/runtime
 /vendor/
+/coverage
 composer.lock
 phpunit.xml
 *.iml

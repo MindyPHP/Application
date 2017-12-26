@@ -3,7 +3,12 @@
     "type": "library",
     "description": "Mindy Application Component",
     "license": "MIT",
-    "homepage": "https://mindy-cms.com",
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
     "autoload": {
         "files": [
             "functions.php"
@@ -15,18 +20,17 @@
             "/Tests/"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Mindy\\Application\\Tests\\": "./Tests/"
+        }
+    },
     "require": {
-        "php": ">=5.5.9",
-        "symfony/framework-bundle": "^3.2",
-        "symfony/console": "^3.2"
+        "php": ">=7.0",
+        "symfony/framework-bundle": "~3.0|~4.0",
+        "symfony/console": "~3.0|~4.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
-    },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.6.8-dev"
-        }
+        "phpunit/phpunit": "^6.5"
     }
 }

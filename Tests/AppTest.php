@@ -11,9 +11,10 @@
 namespace Mindy\Application\Tests;
 
 use Mindy\Application\App;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
-class AppTest extends \PHPUnit_Framework_TestCase
+class AppTest extends TestCase
 {
     public function tearDown()
     {
